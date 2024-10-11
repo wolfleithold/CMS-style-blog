@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Homepage</title>
+    <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            {{#if loggedIn}}
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/logout">Logout</a></li>
+            {{else}}
+                <li><a href="/login">Login</a></li>
+                <li><a href="/signup">Sign Up</a></li>
+            {{/if}}
+        </ul>
+    </nav>
+
+    <!-- Blog Posts Section -->
+    <section>
+        <h1>Welcome to the Blog</h1>
+        {{#if posts.length}}
+            <div class="posts">
+                {{#each posts}}
+                    <div class="post">
+                        <h2><a href="/post/{{id}}">{{title}}</a></h2>
+                        <p>by {{username}} on {{formatDate createdAt}}</p>
+                        <p>{{excerpt content}}</p>
+                        <a href="/post/{{id}}">Read more</a>
+                    </div>
+                {{/each}}
+            </div>
+        {{else}}
+            <p>No blog posts available yet!</p>
+        {{/if}}
+    </section>
+</body>
+</html>
